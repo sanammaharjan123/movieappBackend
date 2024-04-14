@@ -14,8 +14,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz.anyRequest().permitAll())
-                .csrf().disable() // Ensure CSRF protection is disabled for all requests.
-                .cors().disable(); // Optionally disable CORS if it's not needed.
+                .csrf().disable()
+                .cors().disable();
 
         return http.build();
     }

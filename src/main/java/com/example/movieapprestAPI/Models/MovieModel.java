@@ -21,7 +21,7 @@ public class MovieModel {
     public MovieModel() {
     }
 
-    public MovieModel(String title, String price, String synopsis, String smallPoster, String largePoster, String rentPrice, String purchasePrice, boolean featured) {
+    public MovieModel(String title, String price, String synopsis, String previewImg, String titleImg, String rentPrice, String purchasePrice, boolean featured) {
         this.title = title;
         this.price = price;
         this.synopsis = synopsis;
@@ -78,7 +78,7 @@ public class MovieModel {
         return titleImg;
     }
 
-    public void setTitleImgitleImg(String titleImg) {
+    public void setTitleImg(String titleImg) {
         this.titleImg = titleImg;
     }
 

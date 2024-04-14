@@ -5,7 +5,6 @@ public class UserLoginDTO {
     private String email;
     private String password;
 
-    // Getters
     public String getEmail() {
         return email;
     }
@@ -14,7 +13,6 @@ public class UserLoginDTO {
         return password;
     }
 
-    // Setters
     public void setEmail(String email) {
         this.email = email;
     }

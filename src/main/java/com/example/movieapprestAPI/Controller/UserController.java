@@ -23,14 +23,12 @@ public class UserController {
             UserModel newUser = userService.addUser(userModel);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (EmailAlreadyExistsExcept e) {
-            // Handling the specific case where the email already exists
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // HttpStatus.CONFLICT indicates a duplicate entry
         } catch (RuntimeException e) {
-            // General runtime exceptions
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticateUser(@RequestBody UserLoginDTO userLoginDTO) {
         boolean isAuthenticated = userService.authenticateUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
@@ -40,8 +38,6 @@ public class UserController {
             return new ResponseEntity<>("Authentication failed", HttpStatus.UNAUTHORIZED);
         }
     }
-
-
 
     @GetMapping("/{id}")
     public ResponseEntity<UserModel> getUserById(@PathVariable String id) {

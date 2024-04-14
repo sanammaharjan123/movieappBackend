@@ -34,8 +34,7 @@ public class MovieServices {
     }
 
     public void updateMovie(String movieId, MovieModel movie) {
-        // Perform validation or business logic if needed
-        movie.setId(movieId); // Ensure the ID matches
+        movie.setId(movieId);
         movieRepository.save(movie);
     }
 

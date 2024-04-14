@@ -10,16 +10,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfigurations {
-    // The CorsFilter bean might still be useful if you need more customized CORS configurations
-    // that cannot be achieved with WebMvcConfigurer
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*"); // This is very open, consider locking it down in production
-        config.addAllowedMethod("*"); // Allow all HTTP methods
-        config.addAllowedHeader("*"); // Allow all headers
-        source.registerCorsConfiguration("/**", config); // Applies CORS configuration to all endpoints
+        config.addAllowedOrigin("*");
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
 

@@ -5,6 +5,7 @@ import com.example.movieapprestAPI.Repository.TvShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TvShowService {
@@ -20,11 +21,34 @@ public class TvShowService {
         return tvShowRepository.findByFeatured(true);
     }
 
-
-
     public TvShow getTVShowById(String tvShowId) {
         return tvShowRepository.findById(tvShowId).orElse(null);
     }
+
+    public Optional<TvShow> updateTVShow(String id, TvShow tvShowDetails) {
+        Optional<TvShow> tvShowOptional = tvShowRepository.findById(id);
+        if(tvShowOptional.isPresent()) {
+            TvShow tvShowToUpdate = tvShowOptional.get();
+            tvShowToUpdate.setTitle(tvShowDetails.getTitle() != null ? tvShowDetails.getTitle() : tvShowToUpdate.getTitle());
+            tvShowToUpdate.setRentPrice(tvShowDetails.getRentPrice() != null ? tvShowDetails.getRentPrice() : tvShowToUpdate.getRentPrice());
+
+            tvShowRepository.save(tvShowToUpdate);
+            return Optional.of(tvShowToUpdate);
+        } else {
+            return Optional.empty();
+        }
+    }
+    public TvShow addTVShow(TvShow tvShow) {
+        return tvShowRepository.save(tvShow);
+    }
+//    public boolean deleteTvShow(String TvShowId) {
+//
+//        if (TvShowRepository.existsById(TvShowId)) {
+//            TvShowRepository.deleteById(TvShowId);
+//            return true;
+//        }else{
+//            return false;
+//        }
 }
 
 

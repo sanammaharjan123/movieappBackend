@@ -51,7 +51,7 @@ public class MovieController {
     }
 
     // GET /api/movies/{movieId}
-    @GetMapping("/{movieId}")
+    @GetMapping("/{id}")
     public ResponseEntity<MovieModel> getMovieById(@PathVariable String movieId) {
         MovieModel movie = movieService.getMovieById(movieId);
         if (movie != null) {
