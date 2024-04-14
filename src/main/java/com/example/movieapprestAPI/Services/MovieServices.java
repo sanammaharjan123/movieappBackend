@@ -38,7 +38,7 @@ public class MovieServices {
         movieRepository.save(movie);
     }
 
-    public boolean deleteMovie(String movieId) {
+    public boolean deleteMovieById(String movieId) {
 
         if (movieRepository.existsById(movieId)) {
             movieRepository.deleteById(movieId);

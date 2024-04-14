@@ -51,7 +51,7 @@ public class MovieController {
     }
 
     // GET /api/movies/{movieId}
-    @GetMapping("/{id}")
+    @GetMapping("/{movieId}")
     public ResponseEntity<MovieModel> getMovieById(@PathVariable String movieId) {
         MovieModel movie = movieService.getMovieById(movieId);
         if (movie != null) {
@@ -74,12 +74,12 @@ public class MovieController {
 
     // DELETE /api/movies/{movieId}
     @DeleteMapping("/{movieId}")
-    public ResponseEntity<String> deleteMovie(@PathVariable String movieId) {
-        try {
-            movieService.deleteMovie(movieId);
-            return ResponseEntity.ok("Movie deleted successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete movie");
+    public ResponseEntity<?> deleteMovie(@PathVariable String movieId) {
+        boolean deleted = movieService.deleteMovieById(movieId);
+        if (deleted) {
+            return ResponseEntity.ok().body("Movie with ID: " + movieId + " was deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found with ID: " + movieId);
         }
     }
 }
