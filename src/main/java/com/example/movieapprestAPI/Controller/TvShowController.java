@@ -37,7 +37,7 @@ public class TvShowController {
     }
 
     // GET /api/tvshows/{tvShowId}
-    @GetMapping("/{id}")
+    @GetMapping("/{tvShowId}")
     public ResponseEntity<TvShow> getTVShowById(@PathVariable String tvShowId) {
         TvShow tvShow = tvShowService.getTVShowById(tvShowId);
         if (tvShow != null) {
@@ -47,7 +47,7 @@ public class TvShowController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{tvShowId}")
     public ResponseEntity<?> updateTVShow(@PathVariable String id, @RequestBody TvShow tvShow) {
         Optional<TvShow> updatedTVShow = tvShowService.updateTVShow(id, tvShow);
         if(updatedTVShow.isPresent()) {
@@ -61,14 +61,15 @@ public class TvShowController {
         TvShow newTVShow = tvShowService.addTVShow(tvShow);
         return new ResponseEntity<>(newTVShow, HttpStatus.CREATED);
     }
-//    @DeleteMapping("/{TvShowId}")
-//    public ResponseEntity<String> deleteTVShow(@PathVariable String TvShowId) {
-//        try {
-//            TvShowService.deleteTvShow(TvShowId);
-//            return ResponseEntity.ok("TvShow deleted successfully");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete TvShow");
-//        }
-//    }
+    @DeleteMapping("/{TvShowId}")
+    public ResponseEntity<String> deleteTVShow(@PathVariable String TvShowId) {
+            boolean deleted = tvShowService.deleteTvShowById(TvShowId);
+            if (deleted) {
+                return ResponseEntity.ok().body("Tv show with ID: " + TvShowId + " was deleted successfully.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tv show not found with ID: " + TvShowId);
+            }
+
+    }
 }
 

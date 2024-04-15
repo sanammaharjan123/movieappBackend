@@ -4,6 +4,8 @@ import com.example.movieapprestAPI.Models.TvShow;
 import com.example.movieapprestAPI.Repository.TvShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +39,16 @@ public class TvShowService {
         } else {
             return Optional.empty();
         }
+    }
+    public boolean deleteTvShowById(String TvShowId) {
+
+        if (tvShowRepository.existsById(TvShowId)) {
+            tvShowRepository.deleteById(TvShowId);
+            return true;
+        }else{
+            return false;
+        }
+
     }
     public TvShow addTVShow(TvShow tvShow) {
         return tvShowRepository.save(tvShow);
